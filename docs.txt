@@ -1,5 +1,0 @@
-npm init -y: start project
-
-package: morgan --- thu vien in ra log khi call request
-         helmet --- bao ve thong tin quan trong, ngan chan doc cookies
-         compression --- giam dung luong bang thong
