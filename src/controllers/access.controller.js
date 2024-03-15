@@ -1,6 +1,7 @@
 'use strict'
 const { CREATED, SuccessResponse } = require('../core/success.response')
 const AccessService = require('../services/access.service')
+
 class AccessController {
     handlerRefreshToken = async (req, res, next) => {
         // v1

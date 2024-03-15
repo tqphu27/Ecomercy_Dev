@@ -6,40 +6,21 @@ const DOCUMENT_NAME = 'Product'
 const COLLECTION_NAME = 'Products'
 
 const productSchema = new Schema({
-    product_name:{
-        type: String,
-        require: true
-    },
+    product_name:{type: String, required:true},
 
-    product_thumb:{
-        type: String,
-        required: true
-    },
+    product_thumb:{type: String, required:true},
 
-    product_description: {type: Schema.Types.ObjectId, ref: 'Shop'},
+    product_description: String,
 
-    product_price: {
-        type: Number,
-        required: true
-    },
+    product_price: {type: Number, required:true},
 
-    product_quantity: {
-        type: Number,
-        required: true
-    },
+    product_quantity: {type: Number, required:true},
 
-    product_type: {
-        type: String,
-        required: true,
-        enum: ['Electionics', 'Clothing', 'Furniture']
-    },
+    product_type: {type: String, required:true, enum: ['Electronic', 'Clothing', 'Furniture']},
 
-    product_shop: String ,
+    product_shop: {type: Schema.Types.ObjectId, ref: 'Shop'},
 
-    product_attributes: {
-        types: Schema.Types.Mixed,
-        required: true
-    }
+    product_attributes: {type: Schema.Types.Mixed, required:true}
     },{
         collection: COLLECTION_NAME,
         timestamps: true
@@ -50,23 +31,36 @@ const productSchema = new Schema({
 const clothingSchema = new Schema({
     brand: {type: String, require: true},
     size: String,
-    material: String
+    material: String,
+    product_shop: {type: Schema.Types.ObjectId, ref: 'Shop'}
     },{
         collection: 'clothes',
         timestamps: true
 })
 
-const electionicSchema = new Schema({
+const electronicSchema = new Schema({
     manufacturer: {type: String, require: true},
     model: String,
-    color: String
+    color: String,
+    product_shop: {type: Schema.Types.ObjectId, ref: 'Shop'}
     },{
         collection: 'electionics',
         timestamps: true
 })
 
+const furnitureSchema = new Schema({
+    brand: {type: String, require: true},
+    size: String,
+    material: String,
+    product_shop: {type: Schema.Types.ObjectId, ref: 'Shop'}
+    },{
+        collection: 'furnitures',
+        timestamps: true
+})
+
 module.exports = {
-    product: model( DOCUMENT_NAME, productSchema),
-    product: model( 'Electronics', electionicSchema),
-    product: model( 'Clothing', clothingSchema)
+    product: model(DOCUMENT_NAME, productSchema),
+    electronic: model('Electronic', electronicSchema),
+    clothing: model('Clothing', clothingSchema),
+    furniture: model('Furniture', furnitureSchema)
 }
